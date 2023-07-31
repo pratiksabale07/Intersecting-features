@@ -1,0 +1,47 @@
+body{
+  font-size: 15px;
+}
+#container{
+  flex-direction: column;
+}
+.card-container {
+  background-color: whitesmoke;
+  top: 6rem;
+  position: fixed;
+  margin: 1rem;
+}
+
+/* margin: 10px; */
+.list-group {
+  width: 380px;
+}
+
+.featuresList-div {
+  height: 200px;
+  overflow: auto;
+}
+.feature-div {
+  padding: 5px;
+  display: none;
+}
+
+img {
+  position: relative;
+  height: 13px;
+  width: 10px;
+  float: right;
+  top: 5px;
+  left: 8px;
+}
+
+.card-div {
+  overflow: auto;
+  margin: 10px;
+}
+
+.badge {
+  position: absolute;
+  left: 320px;
+  top: 11px;
+  font-size: 10px;
+}
