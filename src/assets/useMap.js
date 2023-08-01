@@ -59,24 +59,18 @@ const useMap = () => {
             let featuresArr = []
             if (selectedFeaturesIds) {
                 while (selectedFeaturesIds.length !== 0) {
+                    let splicedFeatures;
                     if (selectedFeaturesIds.length > maxCount) {
-                        let spliceFeatures = selectedFeaturesIds.splice(0, maxCount)
-                        let finalQuery = featureLayer.createQuery()
-                        finalQuery.where = `objectId IN (${spliceFeatures})`;
-                        let result = await featureLayer.queryFeatures(finalQuery)
-                        result.features.map((feature) => {
-                            featuresArr.push(feature)
-                        })
+                        splicedFeatures = selectedFeaturesIds.splice(0, maxCount);
                     }
                     else {
-                        let finalQuery = featureLayer.createQuery()
-                        finalQuery.where = `objectId IN (${selectedFeaturesIds})`;
-                        let result = await featureLayer.queryFeatures(finalQuery)
+                        splicedFeatures = selectedFeaturesIds
                         selectedFeaturesIds = []
-                        result.features.map((feature) => {
-                            featuresArr.push(feature)
-                        })
                     }
+                    let finalQuery = featureLayer.createQuery()
+                    finalQuery.where = `objectId IN (${splicedFeatures})`;
+                    let result = await featureLayer.queryFeatures(finalQuery)
+                    result.features.map((feature) => featuresArr.push(feature))
                 }
             }
             layersFeaturesList.push(featuresArr)
