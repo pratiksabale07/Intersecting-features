@@ -1,24 +1,25 @@
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useState } from "react";
 import { downHeadArrow, rightHeadarrow } from "../images/images";
 const Display = React.lazy(() => import('./Display'));
 
 const CountFeatures = ({ features, view }) => {
+    const [featureListDiv, setFeaturesListDiv] = useState(false)
     const featuresListDivRef = useRef(null);
     const toogle = (event) => {
-        if (featuresListDivRef.current.style.display === "none") {
+        if (event.target.src === rightHeadarrow) {
             event.target.src = downHeadArrow
-            featuresListDivRef.current.style.display = "block";
-        } else {
-            featuresListDivRef.current.style.display = "none";
+        }
+        else {
             event.target.src = rightHeadarrow
         }
+        setFeaturesListDiv(!featureListDiv)
     };
 
     if (features.length)
         return (
             <>
                 <div className="card-div">
-                    <ul className="list-group">
+                    <ul className="list-group list-group-flush">
                         <li className="list-group-item">
                             {features[0].layer.title}
                             <span className="badge bg-dark rounded-pill">
@@ -26,7 +27,7 @@ const CountFeatures = ({ features, view }) => {
                             </span>
                             <img src={rightHeadarrow} onClick={toogle} alt="downarrow" />
                         </li>
-                        <div ref={featuresListDivRef} className="featuresList-div" style={{ display: 'none' }}>
+                        {featureListDiv && <div ref={featuresListDivRef} className="featuresList-div">
                             {features.map((feature, index) => {
                                 return (
                                     <Suspense key={feature.uid} fallback={<div>loading...</div>}>
@@ -34,7 +35,7 @@ const CountFeatures = ({ features, view }) => {
                                     </Suspense>
                                 );
                             })}
-                        </div>
+                        </div>}
                     </ul >
                 </div >
             </>

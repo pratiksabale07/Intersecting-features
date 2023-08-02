@@ -6,6 +6,7 @@ const Display = ({ view, feature, index }) => {
     const graphicRef = useRef(null)
     const listItemRef = useRef(null)
     const containerRef = useRef(null)
+
     const toogle = (event) => {
         if (containerRef.current.style.display === "none") {
             event.target.src = downHeadArrow

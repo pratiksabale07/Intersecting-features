@@ -35,6 +35,7 @@ const useMap = () => {
                 view: view
             })
             let featureLayers = map.layers.items.filter((item) => item.type === 'feature')
+
             sketch.on('create', (event) => {
                 if (event.state === 'complete') {
                     findFeatures(featureLayers, event)
